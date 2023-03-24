@@ -20,5 +20,8 @@ Route::prefix('/v1')->group(function () {
     Route::post('/register',    [AuthController::class, 'register']);
     Route::post('/login',       [AuthController::class, 'login']);
 
-    Route::post('/create-debt', [PaymentController::class, 'createDebt'])->middleware('tokenValid');
+    Route::middleware('tokenValid')->group(function () {
+        Route::post('/create-debt', [PaymentController::class, 'createDebt']);
+        Route::post('/webhook',     [WebhookController::class, 'index']);
+    });
 });

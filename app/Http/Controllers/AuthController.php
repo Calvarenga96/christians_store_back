@@ -21,12 +21,6 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
-        /**
-         * Se vuelve a reasignar la variable de $user para poder
-         * traer de la base de datos el nombre y correo del usuario creado
-         */
-        $user = $user::select('name', 'email')->get();
-
         return response()->json($user, 201);
     }
 
@@ -61,6 +55,7 @@ class AuthController extends Controller
                     'id'    => $user->id,
                     'name'  => $user->name,
                     'email' => $user->email,
+                    'token' => $token,
                 ],
             ], 200)->cookie($cookie);
         }
@@ -70,7 +65,7 @@ class AuthController extends Controller
         ], 401);
     }
 
-    public function generateToken($id)
+    private function generateToken($id)
     {
         $user           = User::find($id);
         $user->token    = hash('sha256', Str::random(60));

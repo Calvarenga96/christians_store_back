@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function createDebt(CreateDebtRequest $request)
     {
         $url = 'https://staging.adamspay.com/api/v1/debts';
-        $apiKey = env('API_KEY');
+        $apiKey = env('ADAMSPAY_API_KEY');
         $docId  = Str::uuid();
         $start  = Carbon::now()->toAtomString();
         $end    = Carbon::now()->addDays(7)->toAtomString();
@@ -48,13 +48,16 @@ class PaymentController extends Controller
 
         if ($statusCodeFromAdam === 201) {
             $message = 'Deuda creada exitosamente';
+            $success = true;
         } else {
             $message = 'Hubo un error al generar la deuda';
+            $success = true;
         }
 
         return response()->json([
-            'message' => $message,
-            'respnse' => $responseBody,
+            'success'   => $success,
+            'message'   => $message,
+            'response'  => $responseBody,
         ]);
     }
 }
