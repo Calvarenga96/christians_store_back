@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('APP_ENV') === 'local' ? 'localhost' : '.vercel.app',
+    'domain' => env('APP_ENV') === 'local' ? 'localhost' : 'christians-store-front.vercel.app/',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +196,6 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+    'same_site' => 'none',
 
 ];
