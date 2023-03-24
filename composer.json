@@ -50,7 +50,8 @@
             "@php artisan key:generate --ansi"
         ],
         "serve": [
-            "php artisan serve"
+            "Composer\\Config::disableProcessTimeout",
+            "php artisan serve --host=localhost"
         ]
     },
     "extra": {

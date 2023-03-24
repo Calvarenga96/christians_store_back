@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LogoutRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 
@@ -39,9 +40,9 @@ class AuthController extends Controller
              * Si el usuario se autentica correctamente, se solicita la instancia
              * del usuario autenticado
              */
-            $user   = Auth::user();
-            $token  = $this->generateToken($user->id);
-            $nowTo30DaysInMinutes = 60 * 24 * 30;
+            $user                   = Auth::user();
+            $token                  = $this->generateToken($user->id);
+            $nowTo30DaysInMinutes   = 60 * 24 * 30;
 
             $cookie = cookie(
                 'token',
@@ -65,6 +66,15 @@ class AuthController extends Controller
         return response()->json([
             'message'   => 'Credenciales inválidas'
         ], 401);
+    }
+
+    public function logout(LogoutRequest $request)
+    {
+        $user = User::find($request->id);
+        $user->token = null;
+        $user->save();
+
+        return response()->json();
     }
 
     private function generateToken($id)

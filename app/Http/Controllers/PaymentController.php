@@ -51,13 +51,13 @@ class PaymentController extends Controller
             $success = true;
         } else {
             $message = 'Hubo un error al generar la deuda';
-            $success = true;
+            $success = false;
         }
 
         return response()->json([
             'success'   => $success,
             'message'   => $message,
             'response'  => $responseBody,
-        ]);
+        ], $response->status());
     }
 }
