@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('APP_ENV') === 'local' ? 'localhost' : 'christians-store-front.vercel.app/',
+    'domain' => env('APP_ENV') === 'local' ? 'localhost' : 'christians-store-front.vercel.app',
 
     /*
     |--------------------------------------------------------------------------
