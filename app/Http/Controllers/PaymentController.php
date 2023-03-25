@@ -44,10 +44,8 @@ class PaymentController extends Controller
             'Content-Type'  => 'application/json'
         ];
 
-
         $response           = Http::withHeaders($headers)->post($url, $data);
         $responseBody       = json_decode($response->body());
-        return response()->json(['response' => $responseBody]);
         $statusCodeFromAdam = $response->status();
 
         if ($statusCodeFromAdam === 201) {
