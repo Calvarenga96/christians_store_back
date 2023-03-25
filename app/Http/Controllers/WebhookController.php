@@ -10,8 +10,8 @@ class WebhookController extends Controller
 {
     public function index(Request $request)
     {
-        $channel = new Channel('chat');
-        $channel->broadcast(['message' => 'Hola, mundo']);
+        // $channel = new Channel('chat');
+        // $channel->broadcast(['message' => 'Hola, mundo']);
         // $post           = file_get_contents('php://input');
         // $secret         = env('ADAMSPAY_API_SECRET');
         // $hmacExpected   = md5('adams' . $post . $secret);
