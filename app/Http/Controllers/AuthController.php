@@ -64,14 +64,14 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message'   => 'Credenciales inválidas'
+            'message' => 'Credenciales inválidas'
         ], 401);
     }
 
     public function logout(LogoutRequest $request)
     {
-        $user = User::find($request->id);
-        $user->token = null;
+        $user           = User::find($request->id);
+        $user->token    = null;
         $user->save();
 
         return response()->json();

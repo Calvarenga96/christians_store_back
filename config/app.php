@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        BeyondCode\LaravelWebSockets\WebSocketsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -209,7 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'WebSocket' => BeyondCode\LaravelWebSockets\Facades\WebSocket::class,
     ])->toArray(),
 
 ];
