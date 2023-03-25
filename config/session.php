@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => env('APP_ENV') === 'local' ? 'localhost:3000' : '.up.railway.app',
 
     /*
     |--------------------------------------------------------------------------
