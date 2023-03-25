@@ -12,7 +12,6 @@ class PaymentController extends Controller
 {
     public function createDebt(CreateDebtRequest $request)
     {
-        return response()->json(['test']);
         $userId = $request->userId;
         $url    = 'https://staging.adamspay.com/api/v1/debts';
         $apiKey = env('ADAMSPAY_API_KEY');
