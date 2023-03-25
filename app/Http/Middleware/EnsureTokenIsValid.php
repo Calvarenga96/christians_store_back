@@ -16,13 +16,13 @@ class EnsureTokenIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = User::where('token', $request->cookie('token'))->first();
+        $user = User::where('token', $request->cookie('tokenStore'))->first();
 
-        if (!$request->cookie('token')) {
+        if (!$request->cookie('tokenStore')) {
             return response()->json('El token es requerido', 401);
         }
 
-        if ($request->cookie('token') !== $user->token) {
+        if ($request->cookie('tokenStore') !== $user->token) {
             return response()->json('Token inválido', 401);
         }
 

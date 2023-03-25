@@ -45,7 +45,7 @@ class AuthController extends Controller
             $nowTo30DaysInMinutes   = 60 * 24 * 30;
 
             $cookie = cookie(
-                'token',
+                'tokenStore',
                 $token,
                 $nowTo30DaysInMinutes
             );
