@@ -47,7 +47,6 @@ class PaymentController extends Controller
         $response           = Http::withHeaders($headers)->post($url, $data);
         $responseBody       = json_decode($response->body());
         $statusCodeFromAdam = $response->status();
-        return response()->json(['test' => $statusCodeFromAdam]);
 
         if ($statusCodeFromAdam === 201) {
             $message            = 'Deuda creada exitosamente';
