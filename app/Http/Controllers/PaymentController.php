@@ -48,17 +48,13 @@ class PaymentController extends Controller
         $responseBody       = json_decode($response->body());
         $statusCodeFromAdam = $response->status();
 
-        if ($statusCodeFromAdam === 201) {
-            $message            = 'Deuda creada exitosamente';
-            $success            = true;
-            $payment            = new Payment();
-            $payment->doc_id    = $docId;
-            $payment->user_id   = $userId;
-            $payment->save();
-        } else {
-            $message = 'Hubo un error al generar la deuda';
-            $success = false;
-        }
+        $message            = 'Deuda creada exitosamente';
+        $success            = true;
+        $payment            = new Payment();
+        $payment->doc_id    = $docId;
+        $payment->user_id   = $userId;
+        $payment->save();
+
 
         return response()->json([
             'success'   => $success,
