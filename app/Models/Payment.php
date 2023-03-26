@@ -13,6 +13,7 @@ class Payment extends Model
 
     protected $fillable = [
         'doc_id',
+        'user_id'
     ];
 
     public function user()

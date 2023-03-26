@@ -55,6 +55,9 @@ class PaymentController extends Controller
         $payment->user_id   = $userId;
         $payment->save();
 
+        return response()->json([
+            'message'   => $message,
+        ]);
 
         return response()->json([
             'success'   => $success,
