@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PaymentStatusUpdated;
+use App\Events\PaymentsStatusUpdated;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WebhookController extends Controller
@@ -16,6 +17,8 @@ class WebhookController extends Controller
 
         // if ($hmacExpected !== $hmacRecived) return response()->json('', 401);
 
-        PaymentStatusUpdated::dispatch($request);
+        $user = User::find(1);
+
+        PaymentsStatusUpdated::dispatch("Hola");
     }
 }

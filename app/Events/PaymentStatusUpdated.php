@@ -8,7 +8,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PaymentStatusUpdated implements ShouldBroadcast
+class PaymentsStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -27,8 +27,18 @@ class PaymentStatusUpdated implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn()
     {
-        return new Channel('payment-status-update');
+        return ['payments-status-update'];
+    }
+
+    public function broadcastAs()
+    {
+        return "payment-updated";
+    }
+
+    public function broadcastWith()
+    {
+        return ['data' => $this->paymentData];
     }
 }

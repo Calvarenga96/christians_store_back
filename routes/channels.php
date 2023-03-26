@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('payment-status-update', function ($user, $id) {
+Broadcast::channel('payments-status-update', function () {
     return true;
 });
