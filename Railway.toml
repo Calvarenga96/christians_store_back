@@ -1,0 +1,8 @@
+# Railway.toml
+
+[build]
+  builder = "nix"
+  environment = { NIXPKGS_ALLOW_UNFREE = "1", NIXPACK_BUILD_CMD = "composer install && php artisan optimize && php artisan config:cache && php artisan migrate --force" }
+  
+[deploy]
+  command = "php artisan migrate --force"
