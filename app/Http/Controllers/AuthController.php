@@ -58,9 +58,7 @@ class AuthController extends Controller
                     'email' => $user->email,
                     'token' => $token,
                 ],
-            ], 200)->cookie($cookie)->withHeaders([
-                'Access-Control-Allow-Credentials' => true,
-            ]);
+            ], 200)->cookie($cookie);
         }
 
         return response()->json([
