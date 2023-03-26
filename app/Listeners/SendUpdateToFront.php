@@ -19,8 +19,13 @@ class SendUpdateToFront
     /**
      * Handle the event.
      */
-    public function handle(PaymentStatusUpdated $event): void
+    public function handle(PaymentStatusUpdated $event)
     {
         return $event;
+    }
+
+    public function broadcastAs()
+    {
+        return 'PaymentStatusUpdated';
     }
 }
