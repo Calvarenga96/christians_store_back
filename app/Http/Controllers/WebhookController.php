@@ -18,7 +18,7 @@ class WebhookController extends Controller
 
         if ($request->notify->type === 'debtStatus') {
             $docId = $request->debt->docId;
-            $payment = Payment::where('doc_id', $docId);
+            $payment = Payment::where('doc_id', $docId)->get();
             $payment->status = $request->debt->payStatus->status;
             $payment->save();
         }
