@@ -17,7 +17,7 @@ class WebhookController extends Controller
 
         $log = new Log();
         $post = json_decode($post, true);
-        $log->data = json_encode(['notify' => $request->notify]);
+        $log->data = json_encode(['type' => $request->notify->type]);
         $log->save();
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
