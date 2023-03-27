@@ -16,10 +16,9 @@ class WebhookController extends Controller
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
-        if ($request->notify->type === 'debtStatus') {
-            $log = new Log();
-            $log->data = json_encode($request->notify);
-            $log->save();
-        }
+
+        $log = new Log();
+        $log->data = json_encode($post);
+        $log->save();
     }
 }
