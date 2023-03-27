@@ -16,11 +16,11 @@ class WebhookController extends Controller
         $hmacRecived    = $request->header('x-adams-notify-hash');
 
         $log = new Log();
+        $post = json_decode($post, true);
         $log->data = json_encode([$post, $request->notify->type, $hmacExpected, $hmacRecived]);
+        $log->save();
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
-
-        $post = json_decode($post, true);
 
         if ($request->notify->type === 'debtStatus') {
             $docId              = $request->debt->docId;
