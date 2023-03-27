@@ -12,3 +12,7 @@ use Illuminate\Support\Facades\Broadcast;
 | used to check if an authenticated user can listen to the channel.
 |
 */
+
+Broadcast::channel('websocket', function () {
+    return true;
+});

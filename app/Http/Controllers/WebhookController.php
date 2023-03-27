@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PaymentStatusUpdated;
 use App\Models\Log;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class WebhookController extends Controller
         $log = new Log();
         $log->data = json_encode($request);
         $log->save();
+
+        PaymentStatusUpdated::dispatch("hola");
 
         // return response()->json($post);
     }
