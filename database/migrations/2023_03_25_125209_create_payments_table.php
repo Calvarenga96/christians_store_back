@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('doc_id')->nullable();
+
+            $table->string('product');
+            $table->float('value')->nullable();
+            $table->float('paid')->nullable();
+            $table->string('status');
             $table->timestamps();
 
             $table->foreignid('user_id')->constrained('users');
