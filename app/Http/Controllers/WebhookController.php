@@ -14,10 +14,12 @@ class WebhookController extends Controller
         $hmacExpected   = md5('adams' . $post . $secret);
         $hmacRecived    = $request->header('x-adams-notify-hash');
 
-        // if ($hmacExpected !== $hmacRecived) return response()->json('', 401);
+        if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
-        $log = new Log();
-        $log->data = json_encode($request);
-        $log->save();
+        if ($request->notify->type === 'debtStatus') {
+            $log = new Log();
+            $log->data = json_encode($request->notify);
+            $log->save();
+        }
     }
 }
