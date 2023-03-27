@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PaymentStatusUpdated;
-use App\Models\Log;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class WebhookController extends Controller
@@ -17,12 +16,13 @@ class WebhookController extends Controller
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
-        $postToArray = json_decode($post, true);
+        if ($request->notify->type === 'debtStatus') {
+            $docId = $request->debt->docId;
+            $payment = Payment::where('doc_id', $docId);
+            $payment->status = $request->debt->payStatus->status;
+            $payment->save();
+        }
 
-        $log = new Log();
-        $log->data = json_encode([$postToArray, 'hmacExpected' => $hmacExpected, 'hmacRecived' => $hmacRecived, 'notify' => $request->notify]);
-        $log->save();
-
-        return response()->json(json_encode($postToArray));
+        return response()->json([], 204);
     }
 }

@@ -51,6 +51,9 @@ class PaymentController extends Controller
         $payment            = new Payment();
         $payment->doc_id    = $docId;
         $payment->user_id   = $userId;
+        $payment->product   = $request->description;
+        $payment->value     = $request->value;
+        $payment->status    = 'pending';
         $payment->save();
 
         return response()->json([

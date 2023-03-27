@@ -18,7 +18,6 @@ return new class extends Migration
 
             $table->string('product');
             $table->float('value')->nullable();
-            $table->float('paid')->nullable();
             $table->string('status');
             $table->timestamps();
 
