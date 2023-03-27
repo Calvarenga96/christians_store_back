@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -16,12 +17,20 @@ class WebhookController extends Controller
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
+        $post = json_decode($post, true);
+        $log = new Log();
+
         if ($request->notify->type === 'debtStatus') {
-            $docId = $request->debt->docId;
-            $payment = Payment::where('doc_id', $docId)->get();
-            $payment->status = $request->debt->payStatus->status;
+            $docId              = $request->debt->docId;
+            $payment            = Payment::where('doc_id', $docId)->get();
+            $payment->status    = $request->debt->payStatus->status;
             $payment->save();
+            $log->data = json_encode([$post, $payment]);
+        } else {
+            $log->data = json_encode([$post, $request->notify->type]);
         }
+
+        $log->save();
 
         return response()->json([], 204);
     }
