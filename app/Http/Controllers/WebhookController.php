@@ -21,6 +21,8 @@ class WebhookController extends Controller
         $log->data = json_encode($post);
         $log->save();
 
-        PaymentStatusUpdated::dispatch($post);
+        PaymentStatusUpdated::dispatch(json_encode($post));
+
+        return response()->json(json_encode($post));
     }
 }
