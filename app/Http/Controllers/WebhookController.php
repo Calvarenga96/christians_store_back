@@ -20,10 +20,8 @@ class WebhookController extends Controller
         $postToArray = json_decode($post, true);
 
         $log = new Log();
-        $log->data = json_encode($postToArray);
+        $log->data = json_encode([$postToArray, 'hmacExpected' => $hmacExpected, 'hmacRecived' => $hmacRecived]);
         $log->save();
-
-        PaymentStatusUpdated::dispatch(json_encode($postToArray));
 
         return response()->json(json_encode($postToArray));
     }
