@@ -17,13 +17,10 @@ class WebhookController extends Controller
 
         // if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
-
         $log = new Log();
         $log->data = json_encode($request);
         $log->save();
 
-        PaymentStatusUpdated::dispatch("hola");
-
-        // return response()->json($post);
+        PaymentStatusUpdated::dispatch(json_encode($request));
     }
 }
