@@ -30,6 +30,8 @@ class WebhookController extends Controller
             $log->data = json_encode([$post, $request->notify->type]);
         }
 
+        $log->data = json_encode([$post, $request->notify->type]);
+
         $log->save();
 
         return response()->json([], 204);
