@@ -15,7 +15,8 @@ class WebhookController extends Controller
         $hmacExpected   = md5('adams' . $post . $secret);
         $hmacRecived    = $request->header('x-adams-notify-hash');
 
-        $data = json_encode($request);
+        $data = json_decode($request);
+        $data = json_encode($data);
         $log = new Log();
         $log->data = $data;
         $log->save();
