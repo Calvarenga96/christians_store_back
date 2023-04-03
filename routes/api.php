@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/v1')->group(function () {
-    Route::post('/register',    [AuthController::class, 'register']);
-    Route::post('/login',       [AuthController::class, 'login']);
-    Route::post('/webhook',     [WebhookController::class, 'index']);
+    Route::post('/register',    [AuthController::class,     'register']);
+    Route::post('/login',       [AuthController::class,     'login']);
+    Route::post('/webhook',     [WebhookController::class,  'index']);
 
     Route::middleware('tokenValid')->group(function () {
-        Route::post('/create-debt', [PaymentController::class, 'createDebt']);
-        Route::post('/logout',      [AuthController::class, 'logout']);
+        Route::get('/payments/{user_id}',   [PaymentController::class,  'showPayments']);
+
+        Route::post('/create-debt',         [PaymentController::class,  'createDebt']);
+        Route::post('/logout',              [AuthController::class,     'logout']);
     });
 });

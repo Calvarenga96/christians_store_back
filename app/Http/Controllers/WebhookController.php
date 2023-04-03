@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,11 @@ class WebhookController extends Controller
         $secret         = env('ADAMSPAY_API_SECRET');
         $hmacExpected   = md5('adams' . $post . $secret);
         $hmacRecived    = $request->header('x-adams-notify-hash');
+
+        $data = json_encode($request);
+        $log = new Log();
+        $log->data = $data;
+        $log->save();
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 

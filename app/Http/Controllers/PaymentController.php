@@ -58,6 +58,13 @@ class PaymentController extends Controller
 
         return response()->json([
             'response'  => $responseBody,
+            'debt_id'   => $docId
         ], $statusCodeFromAdam);
+    }
+
+    public function showPayments($user_id)
+    {
+        $payments = Payment::where('user_id', $user_id)->get();
+        return response()->json($payments, 200);
     }
 }
