@@ -15,11 +15,6 @@ class WebhookController extends Controller
         $hmacExpected   = md5('adams' . $post . $secret);
         $hmacRecived    = $request->header('x-adams-notify-hash');
 
-        $request = \json_decode($request->getContent(), true);
-        $data = $request->getContent();
-        $log = new Log();
-        $log->data = $data;
-        $log->save();
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
@@ -34,5 +29,10 @@ class WebhookController extends Controller
         $payment            = Payment::where('doc_id', $docId)->get();
         $payment->status    = $request['debt']['payStatus']['status'];
         $payment->save();
+
+        $data = \json_encode($payment);
+        $log = new Log();
+        $log->data = $data;
+        $log->save();
     }
 }
