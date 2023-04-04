@@ -30,7 +30,7 @@ class WebhookController extends Controller
         $payment->status    = $request['debt']['payStatus']['status'];
         $payment->save();
 
-        $data = \json_encode($docId);
+        $data = \json_encode([$docId]);
         $log = new Log();
         $log->data = $data;
         $log->save();
