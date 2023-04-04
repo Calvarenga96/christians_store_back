@@ -23,7 +23,7 @@ class WebhookController extends Controller
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
-        if (isset($request['notify']['type']) && $request['notify']['type'] === 'debtStatus') {
+        if ($request['notify']['type'] === 'debtStatus') {
             $docId              = $request->debt->docId;
             $payment            = Payment::where('doc_id', $docId)->get();
             $payment->status    = $request->debt->payStatus->status;
