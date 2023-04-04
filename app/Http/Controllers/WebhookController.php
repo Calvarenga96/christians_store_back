@@ -24,9 +24,9 @@ class WebhookController extends Controller
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
         if ($request['notify']['type'] === 'debtStatus') {
-            $docId              = $request->debt->docId;
+            $docId              = $request['debt']['docId'];
             $payment            = Payment::where('doc_id', $docId)->get();
-            $payment->status    = $request->debt->payStatus->status;
+            $payment->status    = $request['debt']['payStatus']['status'];
             $payment->save();
         }
 
