@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('product');
             $table->float('value')->nullable();
             $table->string('status');
+            $table->string('urlPayment')->nullable();
             $table->timestamps();
 
             $table->foreignid('user_id')->constrained('users');

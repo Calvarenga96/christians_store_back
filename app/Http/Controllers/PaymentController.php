@@ -48,12 +48,13 @@ class PaymentController extends Controller
         $responseBody       = json_decode($response->body());
         $statusCodeFromAdam = $response->status();
 
-        $payment            = new Payment();
-        $payment->doc_id    = $docId;
-        $payment->user_id   = $userId;
-        $payment->product   = $request->description;
-        $payment->value     = $request->value;
-        $payment->status    = 'pending';
+        $payment                = new Payment();
+        $payment->doc_id        = $docId;
+        $payment->user_id       = $userId;
+        $payment->product       = $request->description;
+        $payment->value         = $request->value;
+        $payment->urlPayment    = $responseBody->debt->payUrl;
+        $payment->status        = 'pending';
         $payment->save();
 
         return response()->json([
