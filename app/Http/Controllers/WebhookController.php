@@ -14,7 +14,7 @@ class WebhookController extends Controller
         $secret         = env('ADAMSPAY_API_SECRET');
         $hmacExpected   = md5('adams' . $post . $secret);
         $hmacRecived    = $request->header('x-adams-notify-hash');
-
+        $request = \json_decode($request->getContent(), true);
 
         if ($hmacExpected !== $hmacRecived) return response()->json([], 401);
 
