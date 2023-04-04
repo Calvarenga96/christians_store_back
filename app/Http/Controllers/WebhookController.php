@@ -26,13 +26,7 @@ class WebhookController extends Controller
     public function updateStatus($request)
     {
         $docId              = $request['debt']['docId'];
-        $payment            = Payment::where('doc_id', $docId)->get();
-
-        $data = \json_encode([$payment]);
-        $log = new Log();
-        $log->data = $data;
-        $log->save();
-
+        $payment            = Payment::where('doc_id', $docId)->first();
         $payment->status    = $request['debt']['payStatus']['status'];
         $payment->save();
     }
