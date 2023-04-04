@@ -58,7 +58,7 @@ class PaymentController extends Controller
 
         return response()->json([
             'response'  => $responseBody,
-            'debt_id'   => $docId
+            'debt_id'   => $payment->doc_id
         ], $statusCodeFromAdam);
     }
 
